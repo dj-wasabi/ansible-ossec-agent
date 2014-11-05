@@ -1,9 +1,12 @@
 ---
 # Tasks specific for RedHat systems
 
-#- name: RedHat | Set some facts
+- name: RedHat | Set some facts
+  set_fact: 
+      ansible_distribution: centos
+  when: ansible_distribution == "RedHat"
 
-- name: RedHat | Install basic repo file
+- name: RedHat | Install atomicorp repo file
   template: src=rhel.repo.j2
             dest={{ item.dest }}
             owner=root
@@ -16,12 +19,21 @@
         enabled: 1,
         gpgcheck: 0,
         gpgkey: 'file:///' }
+
+- name: RedHat | Install epel repo file
+  template: src=rhel.repo.j2
+            dest={{ item.dest }}
+            owner=root
+            group=root
+            mode=0644
+  with_items:
   - { name: 'epel',
         dest: '/etc/yum.repos.d/epel.repo',
         url: "http://mirror.i3d.net/pub/fedora-epel/$releasever/$basearch/",
         enabled: 1,
         gpgcheck: 1,
         gpgkey: "http://mirror.i3d.net/pub/fedora-epel/RPM-GPG-KEY-EPEL-6" }
+  when: ansible_distribution != "Fedora"
 
 
 - name: RedHat | Install ossec-hids-client
