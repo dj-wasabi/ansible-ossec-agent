@@ -1,0 +1,30 @@
+---
+# Tasks specific for RedHat systems
+
+#- name: RedHat | Set some facts
+
+- name: RedHat | Install basic repo file
+  template: src=rhel.repo.j2
+            dest={{ item.dest }}
+            owner=root
+            group=root
+            mode=0644
+  with_items:
+  - { name: 'Atomicorp_-_Ossec',
+        dest: '/etc/yum.repos.d/ossec.repo',
+        url: "http://www5.atomicorp.com/channels/ossec/{{ ansible_distribution|lower() }}/$releasever/$basearch/",
+        enabled: 1,
+        gpgcheck: 0,
+        gpgkey: 'file:///' }
+  - { name: 'epel',
+        dest: '/etc/yum.repos.d/epel.repo',
+        url: "http://mirror.i3d.net/pub/fedora-epel/$releasever/$basearch/",
+        enabled: 1,
+        gpgcheck: 1,
+        gpgkey: "http://mirror.i3d.net/pub/fedora-epel/RPM-GPG-KEY-EPEL-6" }
+
+
+- name: RedHat | Install ossec-hids-client
+  yum: pkg=ossec-hids-client
+       state=present
+

@@ -1,0 +1,8 @@
+---
+# tasks file for ossec-agent
+
+- name: Install the correct repository
+  include: "RedHat.yml"
+  when: ansible_os_family == "RedHat"
+
+
