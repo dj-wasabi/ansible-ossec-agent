@@ -1,0 +1,22 @@
+---
+#
+
+#- name: Debian | Set some facts
+
+- name: Debian | Installing repository Debian
+  shell: "echo \"deb http://ossec.alienvault.com/repos/apt/debian {{ ansible_distribution_release }} main\" >> /etc/apt/sources.list"
+#  apt_repository: repo="deb http://ossec.alienvault.com/repos/apt/debian {{ ansible_distribution_release }} main"
+#                  state=present
+
+- name: Debian | Installing repository key
+  apt_key: url=http://ossec.alienvault.com/repos/apt/conf/ossec-key.gpg.key
+           id=9A1B1C65
+
+- name: Debian | Install ossec-hids-agent
+  apt: pkg=ossec-hids-agent
+       state=present
+       update_cache=yes
+       cache_valid_time=3600
+  
+
+

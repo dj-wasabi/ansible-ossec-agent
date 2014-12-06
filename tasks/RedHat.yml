@@ -6,8 +6,14 @@
       ansible_distribution: centos
   when: ansible_distribution == "RedHat"
 
+- name: RedHat | Installing rpm key
+  rpm_key: key=https://www.atomicorp.com/RPM-GPG-KEY.atomicorp.txt
+           state=present
+  tags:
+    - init
+
 - name: RedHat | Install atomicorp repo file
-  template: src=rhel.repo.j2
+  template: src=etc-yum.repos.d-rhel.repo.j2
             dest={{ item.dest }}
             owner=root
             group=root
@@ -18,10 +24,12 @@
         url: "http://www5.atomicorp.com/channels/ossec/{{ ansible_distribution|lower() }}/$releasever/$basearch/",
         enabled: 1,
         gpgcheck: 0,
-        gpgkey: 'file:///' }
+        gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY.atomicorp.txt' }
+  tags:
+    - init
 
 - name: RedHat | Install epel repo file
-  template: src=rhel.repo.j2
+  template: src=etc-yum.repos.d-rhel.repo.j2
             dest={{ item.dest }}
             owner=root
             group=root
@@ -34,9 +42,12 @@
         gpgcheck: 1,
         gpgkey: "http://mirror.i3d.net/pub/fedora-epel/RPM-GPG-KEY-EPEL-6" }
   when: ansible_distribution != "Fedora"
-
+  tags:
+    - init
 
 - name: RedHat | Install ossec-hids-client
   yum: pkg=ossec-hids-client
        state=present
+  tags:
+    - init
 
