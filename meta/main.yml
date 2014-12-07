@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Werner Dijkerman
-  description: 
+  description: INstalling and maintaining the ossec-agent.
   company: myCompany.Dotcom
   license: license (GPLv3)
   min_ansible_version: 1.4

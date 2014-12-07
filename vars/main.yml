@@ -1,2 +1,4 @@
 ---
 # vars file for ossec-agent
+
+ossec_release_rpm: ossec-release-1.0-2.el6.art.noarch.rpm

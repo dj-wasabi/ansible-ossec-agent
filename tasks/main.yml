@@ -26,10 +26,13 @@
   tags:
     - config
 
+# When provisioning a lot of agents, the following step may fail
+# on the server. So we set ignore_errors to true
 - name: "Starting auth daemon on server {{ ossec_server_name }}"
   shell: '/var/ossec/bin/ossec-authd -p 1515 >/dev/null 2>&1 &'
   when: check_keys.stat.exists == false and ossec_server_name|default("") != ""
   delegate_to: "{{ ossec_server_name }}"
+  ignore_errors: yes
   tags:
     - config
 
@@ -43,10 +46,13 @@
   tags:
     - config
 
+# When provisioning a lot of agents, the following step may fail
+# on the server. So we set ignore_errors to true
 - name: "kill the auth-daemon on server {{ ossec_server_name }}"
   shell: /usr/bin/pkill -f /var/ossec/bin/ossec-authd
   delegate_to: "{{ ossec_server_name }}"
   when: check_keys.stat.exists == false and ossec_server_name|default("") != ""
+  ignore_errors: yes
   tags:
     - config
 
