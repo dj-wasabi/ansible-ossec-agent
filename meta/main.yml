@@ -34,13 +34,9 @@ galaxy_info:
   #  - raring
   #  - saucy
   #  - trusty
-  #- name: Debian
-  #  versions:
-  #  - all
-  #  - etch
-  #  - lenny
-  #  - squeeze
-  #  - wheezy
+  - name: Debian
+    versions:
+    - all
   categories:
   - monitoring
 #dependencies: []
