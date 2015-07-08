@@ -10,10 +10,11 @@
 #  get_url: url=https://www.atomicorp.com/channels/ossec/centos/6/x86_64/RPMS/{{ ossec_release_rpm }}
 #           dest=/usr/src/{{ ossec_release_rpm }}
 #           validate_certs=yes
+- name: RedHat | Install atomicorp repo
+  yum: >
+      name=https://www.atomicorp.com/channels/atomic/centos/{{ansible_distribution_major_version}}/x86_64/RPMS/atomic-release-1.0-19.el{{ansible_distribution_major_version}}.art.noarch.rpm
+      state=present
 
-- name: RedHat | Install release
-  yum: name=https://www.atomicorp.com/channels/ossec/centos/6/x86_64/RPMS/{{ ossec_release_rpm }}
-       state=present
 
 
 #- name: RedHat | Installing rpm key
@@ -54,6 +55,10 @@
 #  when: ansible_distribution != "Fedora"
 #  tags:
 #    - init
+- name: RedHat | Install epel repo
+  yum: >
+      name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ansible_distribution_major_version}}.noarch.rpm
+      state=present
 
 - name: RedHat | Install ossec-hids-client
   yum: pkg=ossec-hids-client
