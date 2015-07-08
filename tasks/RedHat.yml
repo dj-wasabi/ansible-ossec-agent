@@ -6,55 +6,11 @@
       ansible_distribution: centos
   when: ansible_distribution == "RedHat"
 
-#- name: RedHat | 
-#  get_url: url=https://www.atomicorp.com/channels/ossec/centos/6/x86_64/RPMS/{{ ossec_release_rpm }}
-#           dest=/usr/src/{{ ossec_release_rpm }}
-#           validate_certs=yes
 - name: RedHat | Install atomicorp repo
   yum: >
       name=https://www.atomicorp.com/channels/atomic/centos/{{ansible_distribution_major_version}}/x86_64/RPMS/atomic-release-1.0-19.el{{ansible_distribution_major_version}}.art.noarch.rpm
       state=present
 
-
-
-#- name: RedHat | Installing rpm key
-#  rpm_key: key=https://www.atomicorp.com/RPM-GPG-KEY.atomicorp.txt
-#           state=present
-#  tags:
-#    - init
-#
-#- name: RedHat | Install atomicorp repo file
-#  template: src=etc-yum.repos.d-rhel.repo.j2
-#            dest={{ item.dest }}
-#            owner=root
-#            group=root
-#            mode=0644
-#  with_items:
-#  - { name: 'Atomicorp_-_Ossec',
-#        dest: '/etc/yum.repos.d/ossec.repo',
-#        url: "http://www5.atomicorp.com/channels/ossec/{{ ansible_distribution|lower() }}/$releasever/$basearch/",
-#        enabled: 1,
-#        gpgcheck: 0,
-#        gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY.atomicorp.txt' }
-#  tags:
-#    - init
-#
-#- name: RedHat | Install epel repo file
-#  template: src=etc-yum.repos.d-rhel.repo.j2
-#            dest={{ item.dest }}
-#            owner=root
-#            group=root
-#            mode=0644
-#  with_items:
-#  - { name: 'epel',
-#        dest: '/etc/yum.repos.d/epel.repo',
-#        url: "http://mirror.i3d.net/pub/fedora-epel/$releasever/$basearch/",
-#        enabled: 1,
-#        gpgcheck: 1,
-#        gpgkey: "http://mirror.i3d.net/pub/fedora-epel/RPM-GPG-KEY-EPEL-6" }
-#  when: ansible_distribution != "Fedora"
-#  tags:
-#    - init
 - name: RedHat | Install epel repo
   yum: >
       name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ansible_distribution_major_version}}.noarch.rpm
