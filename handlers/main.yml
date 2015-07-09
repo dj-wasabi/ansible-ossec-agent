@@ -5,4 +5,12 @@
   service: name=ossec
            state=restarted
            enabled=yes
+  when: (ansible_os_family != "RedHat" or ansible_os_family != "CentOS")
+
+- name: restart ossec-agent
+  service: name=ossec-hids
+           state=restarted
+           enabled=yes
+  when: (ansible_os_family == "RedHat" or ansible_os_family == "CentOS") and
+        (ansible_distribution_major_version == "7")
 
