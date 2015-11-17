@@ -3,5 +3,8 @@
 <ossec_config>
   <client>
     <server-ip>{{ ossec_server_ip }}</server-ip>
+    {% if ossec_profile is defined %}
+    <config-profile>{{ ossec_profile }}</config-profile>
+    {% endif %}
   </client>
 </ossec_config>
