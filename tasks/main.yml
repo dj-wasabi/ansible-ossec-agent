@@ -42,7 +42,7 @@
 # on the server. So we set ignore_errors to true
 - name: "Starting auth daemon on server {{ ossec_server_name }}"
   shell: '/var/ossec/bin/ossec-authd -p 1515 >/dev/null 2>&1 &'
-  when: check_keys.stat.exists == false and ossec_server_name|default("") != ""
+  when: ossec_managed_server and check_keys.stat.exists == false and ossec_server_name|default("") != ""
   delegate_to: "{{ ossec_server_name }}"
   ignore_errors: yes
   tags:
@@ -50,7 +50,7 @@
 
 - name: 'Please execute the following command on your ossec-server: "/var/ossec/bin/ossec-authd -p 1515 >/dev/null 2>&1 &"'
   pause: minutes=2
-  when: check_keys.stat.exists == false and ossec_server_name|default("") == "" 
+  when: ossec_managed_server and check_keys.stat.exists == false and ossec_server_name|default("") == ""
 
 - name: "register client"
   shell: /var/ossec/bin/agent-auth -m {{ ossec_server_ip }} -p 1515
@@ -63,15 +63,16 @@
 - name: "kill the auth-daemon on server {{ ossec_server_name }}"
   shell: /usr/bin/pkill -f /var/ossec/bin/ossec-authd
   delegate_to: "{{ ossec_server_name }}"
-  when: check_keys.stat.exists == false and ossec_server_name|default("") != ""
+  when: ossec_managed_server and check_keys.stat.exists == false and ossec_server_name|default("") != ""
   ignore_errors: yes
   tags:
     - config
 
 - name: 'Please execute the following command on your ossec-server: "/usr/bin/pkill -f /var/ossec/bin/ossec-authd"'
   pause: minutes=1
-  when: check_keys.stat.exists == false and ossec_server_name|default("") == ""
+  when: ossec_managed_server and check_keys.stat.exists == false and ossec_server_name|default("") == ""
 
 - name: "Start ossec-remoted on server. If this is the first agent added it will not be running."
   shell: /var/ossec/bin/ossec-control start
   delegate_to: "{{ ossec_server_name }}"
+  when: ossec_managed_server
