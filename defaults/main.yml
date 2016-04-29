@@ -3,3 +3,4 @@
 
 ossec_server_ip: 127.0.0.1
 ossec_server_name: ""
+ossec_managed_server: true

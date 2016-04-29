@@ -18,6 +18,7 @@ Role Variables
 This role needs 2 parameters:
 * `ossec_server_ip`: This is the ip address of the server running the ossec-server.
 * `ossec_server_name`: This is the hostname of the server running the ossec-server. 
+* `ossec_managed_server`: When set to false, tasks that delegate to ossec server will be skipped
 
 This role has 2 tasks with 'delagation_to' which needs the parameter `ossec_server_name`. When this parameter is not set, you'll need to run manually the `/var/ossec/bin/ossec-authd` on the server and `/var/ossec/bin/agent-auth` on the agent. When this is the case, it will show you an message with the exact command line.
 
