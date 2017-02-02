@@ -38,41 +38,57 @@
   tags:
     - config
 
+- name: "Check if client.keys exists on ossec-server"
+  stat: path=/var/ossec/etc/client.keys
+  when: ossec_managed_server
+  delegate_to: "{{ ossec_server_name }}"
+  register: check_server_keys
+  tags:
+    - config
+
 # When provisioning a lot of agents, the following step may fail
 # on the server. So we set ignore_errors to true
 - name: "Starting auth daemon on server {{ ossec_server_name }}"
-  shell: service ossec-authd start
-  when: ossec_managed_server and check_keys.stat.exists == false and ossec_server_name|default("") != ""
+  service: name=ossec-authd state=started
+  when: ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") != ""
   delegate_to: "{{ ossec_server_name }}"
   ignore_errors: yes
   tags:
     - config
 
-- name: 'Please execute the following command on your ossec-server: "service ossec-authd start"'
-  pause: minutes=2
-  when: ossec_managed_server and check_keys.stat.exists == false and ossec_server_name|default("") == ""
+- pause:
+    minutes: 2
+    prompt: 'Please execute the following command on your ossec-server: "service ossec-authd start"'
+  when: not ossec_managed_server and not check_keys.stat.exists or ossec_server_name|default("") == ""
 
 - name: "register client"
   shell: /var/ossec/bin/agent-auth -m {{ ossec_server_ip|default(ossec_server_fqdn) }} -p 1515
-         creates=/var/ossec/etc/client.keys
+  args:
+    creates: /var/ossec/etc/client.keys
   tags:
     - config
 
 # When provisioning a lot of agents, the following step may fail
 # on the server. So we set ignore_errors to true
 - name: "kill the auth-daemon on server {{ ossec_server_name }}"
-  shell: service ossec-authd stop
+  service: name=ossec-authd state=stopped
   delegate_to: "{{ ossec_server_name }}"
-  when: ossec_managed_server and check_keys.stat.exists == false and ossec_server_name|default("") != ""
+  when: ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") != ""
   ignore_errors: yes
   tags:
     - config
 
-- name: 'Please execute the following command on your ossec-server: "service ossec-authd stop"'
-  pause: minutes=1
-  when: ossec_managed_server and check_keys.stat.exists == false and ossec_server_name|default("") == ""
+- pause:
+    minutes: 2
+    prompt: 'Please execute the following command on your ossec-server: "service ossec-authd stop"'
+  when: not ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") == ""
 
-- name: "Start ossec-remoted on server. If this is the first agent added it will not be running."
-  shell: /var/ossec/bin/ossec-control start
+- name: "Restart ossec-remoted on server. If this is the first agent added it will not be running."
+  shell: /var/ossec/bin/ossec-control restart
   delegate_to: "{{ ossec_server_name }}"
-  when: ossec_managed_server
+  when: ossec_managed_server and not check_server_keys.stat.exists and ossec_server_name|default("") != ""
+
+- pause:
+    minutes: 2
+    prompt: 'Please execute the following command on your ossec-server: "/var/ossec/bin/ossec-control restart"'
+  when: not ossec_managed_server and not check_server_keys.stat.exists and ossec_server_name|default("") == ""
