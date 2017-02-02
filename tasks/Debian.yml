@@ -8,5 +8,3 @@
 - name: Debian/Ubuntu | Install ossec-hids-agent
   apt: pkg=ossec-hids-agent
        state=present
-       update_cache=yes
-       cache_valid_time=3600
