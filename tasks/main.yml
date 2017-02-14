@@ -46,14 +46,11 @@
   tags:
     - config
 
-# When provisioning a lot of agents, the following step may fail
-# on the server. So we set ignore_errors to true
 - name: "Starting auth daemon on server {{ ossec_server_name }}"
   service: name=ossec-authd state=started
   when: ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") != ""
   delegate_to: "{{ ossec_server_name }}"
   run_once: true
-  ignore_errors: yes
   tags:
     - config
 
@@ -73,13 +70,10 @@
     - config
     - skip_ansible_lint
 
-# When provisioning a lot of agents, the following step may fail
-# on the server. So we set ignore_errors to true
 - name: "kill the auth-daemon on server {{ ossec_server_name }}"
   service: name=ossec-authd state=stopped
   delegate_to: "{{ ossec_server_name }}"
   when: ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") != ""
-  ignore_errors: yes
   run_once: true
   tags:
     - config
