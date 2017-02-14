@@ -52,6 +52,7 @@
   service: name=ossec-authd state=started
   when: ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") != ""
   delegate_to: "{{ ossec_server_name }}"
+  run_once: true
   ignore_errors: yes
   tags:
     - config
@@ -79,6 +80,7 @@
   delegate_to: "{{ ossec_server_name }}"
   when: ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") != ""
   ignore_errors: yes
+  run_once: true
   tags:
     - config
 
@@ -92,6 +94,7 @@
   shell: /var/ossec/bin/ossec-control restart
   delegate_to: "{{ ossec_server_name }}"
   when: ossec_managed_server and not check_server_keys.stat.exists and ossec_server_name|default("") != ""
+  run_once: true
   tags:
     - skip_ansible_lint
 
