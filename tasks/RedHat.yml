@@ -2,7 +2,7 @@
 # Tasks specific for RedHat systems
 
 - name: RedHat | Set some facts
-  set_fact: 
+  set_fact:
       ansible_distribution: centos
   when: ansible_distribution == "RedHat"
 
@@ -21,4 +21,3 @@
        state=present
   tags:
     - init
-
