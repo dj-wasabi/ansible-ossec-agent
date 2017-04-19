@@ -1,9 +1,9 @@
 ---
 - name: Debian/Ubuntu | Installing repository key
-  apt_key: url=http://ossec.alienvault.com/repos/apt/conf/ossec-key.gpg.key
+  apt_key: url=http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key
 
 - name: Debian/Ubuntu | Installing repository
-  apt_repository: repo="deb http://ossec.alienvault.com/repos/apt/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main" state=present
+  apt_repository: repo="deb http://ossec.wazuh.com/repos/apt/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main" state=present
 
 - name: Debian/Ubuntu | Install ossec-hids-agent
   apt: pkg=ossec-hids-agent
