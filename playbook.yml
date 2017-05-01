@@ -9,6 +9,7 @@
   pre_tasks:
     - name: "Get ip Ossec Server"
       local_action: shell docker inspect --format \{\{.NetworkSettings.IPAddress\}\} ossec-server-centos
+      register: ossec_server
       changed_when: False
   roles:
     - role: ansible-ossec-agent
