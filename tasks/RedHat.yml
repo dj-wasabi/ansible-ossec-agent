@@ -8,7 +8,7 @@
 
 - name: RedHat | Install atomicorp repo
   yum: >
-      name=https://www.atomicorp.com/channels/atomic/centos/{{ansible_distribution_major_version}}/x86_64/RPMS/atomic-release-1.0-19.el{{ansible_distribution_major_version}}.art.noarch.rpm
+      name=https://www.atomicorp.com/channels/atomic/centos/{{ansible_distribution_major_version}}/x86_64/RPMS/atomic-release-1.0-21.el{{ansible_distribution_major_version}}.art.noarch.rpm
       state=present
 
 - name: RedHat | Install epel repo
