@@ -27,7 +27,7 @@ def test_client_keys(File):
     zabbix_server_conf = File("/var/ossec/etc/client.keys")
     assert zabbix_server_conf.user == "root"
     assert zabbix_server_conf.group == "ossec"
-    assert zabbix_server_conf.mode == 0o644
+    assert zabbix_server_conf.mode == 0o640
 
 
 def test_ossec_agent(File, SystemInfo):
