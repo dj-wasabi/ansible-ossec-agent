@@ -1,7 +1,6 @@
 ---
 # defaults file for ossec-agent
 
-#ossec_server_fqdn: ossec-server.local
-#ossec_server_ip: 127.0.0.1
 ossec_server_name: ""
 ossec_managed_server: true
+ossec_server_atomic_release: 1.0-21

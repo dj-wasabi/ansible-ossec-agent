@@ -1,0 +1,11 @@
+---
+- name: Prepare
+  hosts: server
+  pre_tasks:
+    - name: "Installing dummy file"
+      file:
+        path: /etc/sysconfig/network
+        state: touch
+
+  roles:
+    - role: dj-wasabi.ossec-server
