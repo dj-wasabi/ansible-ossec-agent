@@ -10,7 +10,7 @@
     - name: "Get ip Ossec Server"
       local_action: shell docker inspect --format \{\{.NetworkSettings.IPAddress\}\} ossec-server-centos
       register: ossec_server
-      changed_when: ossec_server.rc == 12
+      changed_when: False
   roles:
     - role: ansible-ossec-agent
       ossec_server_name: ossec-server-centos
