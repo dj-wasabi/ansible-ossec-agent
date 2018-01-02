@@ -29,6 +29,9 @@ This role needs 4 parameters:
 
 This role has 3 tasks with 'delagation_to' which needs the parameter `ossec_server_name`. When this parameter is not set, you'll need to run manually the `/var/ossec/bin/ossec-authd` on the server and `/var/ossec/bin/agent-auth` on the agent. When this is the case, it will show you an message with the exact command line.
 
+The following role variable is optional:
+* `ossec_active_response_disabled`: Disables active response if set to yes. If this is not defined active response is enabled.
+
 Dependencies
 ------------
 

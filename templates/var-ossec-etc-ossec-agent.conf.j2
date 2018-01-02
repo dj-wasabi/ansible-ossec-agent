@@ -1,6 +1,11 @@
 <!-- OSSEC example config -->
 
 <ossec_config>
+  {% if ossec_active_response_disabled is defined %}
+  <active-response>
+    <disabled>{{ ossec_active_response_disabled }}</disabled>
+  </active-response>
+  {% endif %}
   <client>
     {% if ossec_server_ip is defined %}
     <server-ip>{{ ossec_server_ip }}</server-ip>
