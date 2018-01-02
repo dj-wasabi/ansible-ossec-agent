@@ -1,23 +1,24 @@
 ---
 # Tasks specific for RedHat systems
 
-- name: RedHat | Set some facts
+- name: "RedHat | Set some facts"
   set_fact:
-      ansible_distribution: centos
+    ansible_distribution: centos
   when: ansible_distribution == "RedHat"
 
-- name: RedHat | Install atomicorp repo
-  yum: >
-      name=https://www.atomicorp.com/channels/atomic/centos/{{ansible_distribution_major_version}}/x86_64/RPMS/atomic-release-1.0-21.el{{ansible_distribution_major_version}}.art.noarch.rpm
-      state=present
+- name: "RedHat | Install atomicorp repo"
+  yum:
+    name: "https://www.atomicorp.com/channels/atomic/centos/{{ ansible_distribution_major_version }}/x86_64/RPMS/atomic-release-{{ ossec_server_atomic_release }}.el{{ ansible_distribution_major_version }}.art.noarch.rpm"
+    state: present
 
-- name: RedHat | Install epel repo
-  yum: >
-      name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ansible_distribution_major_version}}.noarch.rpm
-      state=present
+- name: "RedHat | Install epel repo"
+  yum:
+    name: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+    state: present
 
-- name: RedHat | Install ossec-hids-client
-  yum: pkg=ossec-hids-client
-       state=present
+- name: "RedHat | Install ossec-hids-client"
+  yum:
+    pkg: "{{ ossec_agent_package_name }}"
+    state: present
   tags:
     - init

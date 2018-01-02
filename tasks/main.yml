@@ -1,6 +1,9 @@
 ---
 # tasks file for ossec-agent
 
+- name: "Include OS-specific variables"
+  include_vars: "{{ ansible_os_family }}.yml"
+
 - name: "Install the correct repository"
   include: "RedHat.yml"
   when: ansible_os_family == "RedHat"
@@ -22,24 +25,27 @@
   when: ansible_os_family == "Debian"
 
 - name: "Installing the ossec-agent.conf"
-  template: src=var-ossec-etc-ossec-agent.conf.j2
-            dest=/var/ossec/etc/{{ ossec_agent_config_filename }}
-            owner=root
-            group=root
-            mode=0644
+  template:
+    src: var-ossec-etc-ossec-agent.conf.j2
+    dest: /var/ossec/etc/{{ ossec_agent_config_filename }}
+    owner: root
+    group: root
+    mode: 0644
   notify: restart ossec-agent
   tags:
     - init
     - config
 
 - name: "Check if client.keys exists"
-  stat: path=/var/ossec/etc/client.keys
+  stat:
+    path: /var/ossec/etc/client.keys
   register: check_keys
   tags:
     - config
 
 - name: "Check if client.keys exists on ossec-server"
-  stat: path=/var/ossec/etc/client.keys
+  stat:
+    path: /var/ossec/etc/client.keys
   when: ossec_managed_server
   delegate_to: "{{ ossec_server_name }}"
   register: check_server_keys
@@ -47,7 +53,9 @@
     - config
 
 - name: "Starting auth daemon on server {{ ossec_server_name }}"
-  service: name=ossec-authd state=started
+  service:
+    name: ossec-authd
+    state: started
   when: ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") != ""
   delegate_to: "{{ ossec_server_name }}"
   run_once: true
@@ -71,7 +79,9 @@
     - skip_ansible_lint
 
 - name: "kill the auth-daemon on server {{ ossec_server_name }}"
-  service: name=ossec-authd state=stopped
+  service:
+    name: ossec-authd
+    state: stopped
   delegate_to: "{{ ossec_server_name }}"
   when: ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") != ""
   run_once: true
@@ -97,3 +107,9 @@
     minutes: 2
     prompt: 'Please execute the following command on your ossec-server: "/var/ossec/bin/ossec-control restart"'
   when: not ossec_managed_server and not check_server_keys.stat.exists and ossec_server_name|default("") == ""
+
+- name: "Start ossec-agent if not already running"
+  service:
+    name: "{{ ossec_init_name }}"
+    state: started
+    enabled: yes
