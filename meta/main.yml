@@ -6,29 +6,17 @@ galaxy_info:
   license: license (GPLv3)
   min_ansible_version: 1.4
   platforms:
-  - name: EL
-    versions:
-    - 5
-    - 6
-    - 7
-  - name: Fedora
-    versions:
-    - all
-  #- name: Ubuntu
-  #  versions:
-  #  - all
-  #  - lucid
-  #  - maverick
-  #  - natty
-  #  - oneiric
-  #  - precise
-  #  - quantal
-  #  - raring
-  #  - saucy
-  #  - trusty
-  - name: Debian
-    versions:
-    - all
+    - name: EL
+      versions:
+        - 5
+        - 6
+        - 7
+    - name: Fedora
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
   categories:
-  - monitoring
+    - monitoring
 dependencies: []

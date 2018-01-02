@@ -1,0 +1,98 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+  options:
+    config-file: molecule/default/yaml-lint.yml
+
+platforms:
+  - name: ossec-server-centos
+    hostname: ossec-server-centos
+    groups:
+      - server
+    image: milcom/centos7-systemd
+    privileged: True
+    networks:
+      - name: ossec
+      - name: ossec6
+  - name: ossec-agent-centos
+    groups:
+      - agent
+    image: milcom/centos7-systemd
+    privileged: True
+    networks:
+      - name: ossec
+  - name: ossec-agent-debian
+    groups:
+      - agent
+    image: maint/debian-systemd
+    privileged: True
+    networks:
+      - name: ossec
+
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  inventory:
+    group_vars:
+      server:
+        ossec_server_config:
+          mail_to:
+            - me@example.com
+          mail_smtp_server: localhost
+          mail_from: ossec@example.com
+          frequency_check: 72000
+          ignore_files:
+            - /etc/mtab
+            - /etc/mnttab
+            - /etc/hosts.deny
+          directories:
+            - check_all: 'yes'
+              dirs: /etc,/usr/bin,/usr/sbin
+            - check_all: 'yes'
+              dirs: /bin,/sbin
+          localfiles:
+            - format: 'syslog'
+              location: '/var/log/messages'
+            - format: 'syslog'
+              location: '/var/log/secure'
+          globals:
+            - '127.0.0.1'
+            - '192.168.2.1'
+          connection: 'secure'
+          log_level: 1
+          email_level: 7
+          commands:
+            - name: 'host-deny'
+              executable: 'host-deny.sh'
+              expect: 'srcip'
+              timeout_allowed: 'yes'
+          active_responses:
+            - command: 'host-deny'
+              location: 'local'
+              level: 6
+              timeout: 600
+        ossec_agent_configs:
+          - type: os
+            type_value: linux
+            frequency_check: 79200
+            ignore_files:
+              - /etc/mtab
+              - /etc/mnttab
+            localfiles:
+              - format: 'syslog'
+                location: '/var/log/messages'
+            directories:
+              - check_all: yes
+                dirs: /etc,/usr/bin,/usr/sbin
+
+scenario:
+  name: default
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
