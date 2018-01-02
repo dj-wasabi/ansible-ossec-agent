@@ -78,6 +78,11 @@
     - config
     - skip_ansible_lint
 
+- name: Set permissions on client.keys file
+  file:
+    dest: /var/ossec/etc/client.keys
+    mode: 0640
+
 - name: "kill the auth-daemon on server {{ ossec_server_name }}"
   service:
     name: ossec-authd
