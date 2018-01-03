@@ -32,7 +32,7 @@ This role has 3 tasks with 'delagation_to' which needs the parameter `ossec_serv
 The following role variables are optional:
 * `ossec_active_response_disabled`: Disables active response if set to yes. If this is not defined active response is enabled.
 * `ossec_disable_public_repos`: Disables installation of public repositories if set to "yes".
-* `ossec_agent_package_name`: Default is "ossec-hids-agent". For RPM based systems (e.g. CentOS and RedHat), this can be a URL or path to a rpm file.
+* `ossec_agent_package_name`: Default is "ossec-hids-agent". This can be set to a URL or path to a .rpm file or path to a .deb file if the public repositories cannot be used.
 
 Dependencies
 ------------
