@@ -1,16 +1,13 @@
 ---
 # tasks file for ossec-agent
 
-- name: "Include OS-specific variables"
-  include_vars: "{{ ansible_os_family }}.yml"
-
 - name: "Install the correct repository"
-  include: "RedHat.yml"
-  when: ansible_os_family == "RedHat"
+  include_tasks: "{{ ansible_os_family }}.yml"
+  when: (ossec_disable_public_repos is not defined) or (ossec_disable_public_repos != 'yes')
 
-- name: "Install the correct repository"
-  include: "Debian.yml"
-  when: ansible_os_family == "Debian"
+- name: "Install {{ ossec_agent_package_name }}"
+  package:
+    name: "{{ ossec_agent_package_name }}"
 
 - name: Set ossec deploy facts for RedHat
   set_fact:
