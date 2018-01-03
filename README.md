@@ -21,18 +21,18 @@ So, you'll need one of those operating systems.. :-)
 Role Variables
 --------------
 
-This role needs 5 parameters:
+This role needs 4 parameters:
 * `ossec_server_ip`: This is the ip address of the server running the ossec-server.
 * `ossec_server_fqdn`: This is the fqdn of the server running the ossec-server.
 * `ossec_server_name`: This is the hostname of the server running the ossec-server used for delegate with ansible. 
 * `ossec_managed_server`: When set to false, tasks that delegate to ossec server will be skipped
-* `ossec_agent_package_name`: Default is "ossec-hids-agent".
 
 This role has 3 tasks with 'delagation_to' which needs the parameter `ossec_server_name`. When this parameter is not set, you'll need to run manually the `/var/ossec/bin/ossec-authd` on the server and `/var/ossec/bin/agent-auth` on the agent. When this is the case, it will show you an message with the exact command line.
 
 The following role variables are optional:
 * `ossec_active_response_disabled`: Disables active response if set to yes. If this is not defined active response is enabled.
 * `ossec_disable_public_repos`: Disables installation of public repositories if set to "yes".
+* `ossec_agent_package_name`: Default is "ossec-hids-agent". For RPM based systems (e.g. CentOS and RedHat), this can be a URL or path to a rpm file.
 
 Dependencies
 ------------
