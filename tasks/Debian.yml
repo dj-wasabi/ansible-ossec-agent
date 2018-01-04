@@ -4,7 +4,3 @@
 
 - name: Debian/Ubuntu | Installing repository
   apt_repository: repo="deb http://ossec.wazuh.com/repos/apt/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main" state=present
-
-- name: Debian/Ubuntu | Install ossec-hids-agent
-  apt: pkg=ossec-hids-agent
-       state=present
