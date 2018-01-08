@@ -73,7 +73,7 @@
     - skip_ansible_lint
 
 - name: "register client"
-  shell: /var/ossec/bin/agent-auth -m {{ ossec_server_ip|default(ossec_server_fqdn) }} -p 1515
+  shell: "/var/ossec/bin/agent-auth -m {{ ossec_server_ip|default(ossec_server_fqdn) }} -p 1515 -A '{{ ossec_agent_name|default(ansible_hostname) }}'"
   args:
     creates: /var/ossec/etc/client.keys
   tags:
