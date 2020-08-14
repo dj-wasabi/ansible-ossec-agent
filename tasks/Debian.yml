@@ -1,6 +1,6 @@
 ---
 - name: Debian/Ubuntu | Installing repository key
-  apt_key: url=http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key
+  apt_key: url=https://www.atomicorp.com/RPM-GPG-KEY.atomicorp.txt
 
 - name: Debian/Ubuntu | Installing repository
-  apt_repository: repo="deb http://ossec.wazuh.com/repos/apt/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main" state=present
+  apt_repository: repo="deb https://updates.atomicorp.com/channels/atomic/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main" state=present
