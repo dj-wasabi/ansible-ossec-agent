@@ -1,6 +1,10 @@
 ---
 - name: Debian/Ubuntu | Installing repository key
-  apt_key: url=https://www.atomicorp.com/RPM-GPG-KEY.atomicorp.txt
+  apt_key:
+    url: "{{ ossec_agent_debian_repository_key }}"
+  when: ossec_agent_debian_repository_key
 
 - name: Debian/Ubuntu | Installing repository
-  apt_repository: repo="deb https://updates.atomicorp.com/channels/atomic/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main" state=present
+  apt_repository:
+    repo: "deb {{ ossec_agent_debian_repository_url }} {{ ansible_distribution_release }} main"
+    state: present
