@@ -5,3 +5,7 @@ ossec_server_name: ""
 ossec_managed_server: true
 ossec_server_atomic_release: 1.0-21
 ossec_agent_package_name: ossec-hids-agent
+
+# Set to an empty string or null to disable adding a key
+ossec_agent_debian_repository_key: "https://www.atomicorp.com/RPM-GPG-KEY.atomicorp.txt"
+ossec_agent_debian_repository_url: "https://updates.atomicorp.com/channels/atomic/{{ ansible_distribution | lower }}"
