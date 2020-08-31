@@ -10,14 +10,21 @@ on:
   pull_request:
     branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+    strategy:
+      fail-fast: false
+      matrix:
+        molecule_distro:
+          - container: centos7
+          - container: centos8
+          - container: amazonlinux2
+          - container: ubuntu1604
+          - container: ubuntu1804
+          - container: debian8
+          - container: debian9
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Check out code
         uses: actions/checkout@v1
