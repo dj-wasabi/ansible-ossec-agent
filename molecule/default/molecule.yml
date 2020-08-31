@@ -17,7 +17,6 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     networks:
       - name: ossec
-      - name: ossec6
   - name: ossec-agent-${MY_MOLECULE_CONTAINER:-centos7}
     groups:
       - agent
