@@ -38,6 +38,14 @@
     - init
     - config
 
+- name: "Install pass file"
+  copy:
+    dest: /var/ossec/etc/authd.pass
+    content: "{{ ossec_agent_client_pass }}"
+    owner: ossec
+    group: ossec
+    mode: 0600
+
 - name: "Check if client.keys exists"
   stat:
     path: /var/ossec/etc/client.keys
@@ -55,7 +63,7 @@
     - config
 
 - name: "Starting auth daemon on server {{ ossec_server_name }}"
-  service:
+  systemd:
     name: ossec-authd
     state: started
   when: ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") != ""
@@ -73,7 +81,7 @@
     - skip_ansible_lint
 
 - name: "register client"
-  shell: "/var/ossec/bin/agent-auth -m {{ ossec_server_ip|default(ossec_server_fqdn) }} -p 1515 -A '{{ ossec_agent_name|default(ansible_hostname) }}'"
+  shell: "/var/ossec/bin/agent-auth -m {{ ossec_server_ip|default(ossec_server_fqdn) }} -p 1515 -A '{{ ossec_agent_name|default(ansible_hostname) }}' -P /var/ossec/etc/authd.pass"
   args:
     creates: /var/ossec/etc/client.keys
   tags:
