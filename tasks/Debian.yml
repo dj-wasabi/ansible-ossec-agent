@@ -2,9 +2,9 @@
 - name: Debian/Ubuntu | Installing repository key
   apt_key:
     url: "{{ ossec_agent_debian_repository_key }}"
-  when: ossec_agent_debian_repository_key
 
 - name: Debian/Ubuntu | Installing repository
   apt_repository:
     repo: "deb {{ ossec_agent_debian_repository_url }} {{ ansible_distribution_release }} main"
+    mode: '0644'
     state: present
