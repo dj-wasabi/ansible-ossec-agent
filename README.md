@@ -5,7 +5,7 @@ This role will install and configure an ossec-agent on the server. When there is
 
 Build Status:
 
-[![Build Status](https://travis-ci.org/dj-wasabi/ansible-ossec-agent.svg?branch=master)](https://travis-ci.org/dj-wasabi/ansible-ossec-agent)
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fdj-wasabi%2Fansible-ossec-agent%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/dj-wasabi/ansible-ossec-agent/goto?ref=master)
 
 
 Requirements
