@@ -9,3 +9,27 @@
 
   roles:
     - role: dj-wasabi.ossec-server
+
+- name: Prepare
+  hosts: agent
+  tasks:
+
+    - name: "Apt-update"
+      shell: apt-get update
+      args:
+        warn: False
+      when:
+        - ansible_os_family == "Debian"
+    
+    - name: "Installing tools on Debian"
+      apt:
+        name:
+          - net-tools
+          - apt-transport-https
+          - sudo
+          - apt-utils
+          - ca-certificates
+          - "{{ 'gnupg-agent' if ansible_distribution_major_version in ['8', '16'] else 'gpg-agent' }}"
+        state: present
+      when:
+        - ansible_os_family == "Debian"
