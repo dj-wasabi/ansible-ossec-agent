@@ -4,6 +4,12 @@ Below an overview of all changes in the releases.
 
 Version (Release date)
 
+0.2.0   (2020-08-31)
+
+  * Optionally disable public repos #22 (By pull request: briankfitzwater (Thanks!))
+  * Option to set agent name #23 (By pull request: briankfitzwater (Thanks!))
+  * Switch repo to atomicorp #29 (By pull request: emmetog (Thanks!))
+
 0.1.0   (2018-01-02)
 
   * Using Molecule V2 for CI test purposes #21
