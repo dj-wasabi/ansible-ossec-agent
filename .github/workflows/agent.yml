@@ -18,11 +18,11 @@ jobs:
         molecule_distro:
           - container: centos7
           - container: centos8
-          - container: amazonlinux2
-          - container: ubuntu1604
-          - container: ubuntu1804
-          - container: debian8
-          - container: debian9
+          # - container: amazonlinux2
+          # - container: ubuntu1604
+          # - container: ubuntu1804
+          # - container: debian8
+          # - container: debian9
     runs-on: ubuntu-latest
 
     steps:
