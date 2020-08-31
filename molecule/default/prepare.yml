@@ -9,3 +9,12 @@
 
   roles:
     - role: dj-wasabi.ossec-server
+
+  # post_tasks:
+  #   - name: "Install pass file"
+  #     copy:
+  #       dest: /var/ossec/etc/authd.pass
+  #       content: myfilemyfilemyfilemyfilemyfile12
+  #       owner: ossec
+  #       group: ossec
+  #       mode: 0600

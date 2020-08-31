@@ -3,41 +3,29 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:
-  name: yamllint
-  options:
-    config-file: molecule/default/yaml-lint.yml
 
 platforms:
   - name: ossec-server-centos
     hostname: ossec-server-centos
     groups:
       - server
-    image: milcom/centos7-systemd
+    image: geerlingguy/docker-centos7-ansible
+    pre_build_image: True
     privileged: True
+    command: /usr/sbin/init
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     networks:
       - name: ossec
       - name: ossec6
-  - name: ossec-agent-centos
+  - name: ossec-agent-${MY_MOLECULE_CONTAINER:-centos7}
     groups:
       - agent
-    image: milcom/centos7-systemd
+    image: ${MY_MOLECULE_IMAGE:-"geerlingguy/docker-centos7-ansible"}
     privileged: True
-    networks:
-      - name: ossec
-  - name: ossec-agent-debian
-    groups:
-      - agent
-    image: maint/debian-systemd
-    privileged: True
-    networks:
-      - name: ossec
-  - name: ossec-agent-ubuntu
-    image: solita/ubuntu-systemd
-    command: /sbin/init
-    groups:
-      - ossec
-    privileged: True
+    pre_build_image: True
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
     networks:
       - name: ossec
 
