@@ -8,8 +8,15 @@
 
 - name: "RedHat | Install atomicorp repo"
   yum:
-    name: "https://www.atomicorp.com/channels/atomic/centos/{{ ansible_distribution_major_version }}/x86_64/RPMS/atomic-release-{{ ossec_server_atomic_release }}.el{{ ansible_distribution_major_version }}.art.noarch.rpm"
+    name: "{{ ossec_download_url }}"
+    disable_gpg_check: "{{ ossec_server_disable_gpgkey }}"
     state: present
+
+- name: "RedHat | Install epel repo rpm key"
+  rpm_key:
+    state: present
+    key: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
+
 
 - name: "RedHat | Install epel repo"
   yum:
