@@ -34,7 +34,10 @@ provisioner:
     name: ansible-lint
   inventory:
     group_vars:
+      agent:
+        ossec_server_disable_gpgkey: True
       server:
+        ossec_server_disable_gpgkey: True
         ossec_server_config:
           mail_to:
             - me@example.com
