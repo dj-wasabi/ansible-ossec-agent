@@ -45,6 +45,7 @@
     owner: ossec
     group: ossec
     mode: 0600
+  when: ossec_agent_client_pass != ""
 
 - name: "Check if client.keys exists"
   stat:
@@ -76,12 +77,26 @@
   pause:
     minutes: 2
     prompt: 'Please execute the following command on your ossec-server: "service ossec-authd start"'
-  when: not ossec_managed_server and not check_keys.stat.exists or ossec_server_name|default("") == ""
+  when: ossec_agent_pause_for_manual_steps and ( not ossec_managed_server and not check_keys.stat.exists or ossec_server_name|default("") == "" )
   tags:
     - skip_ansible_lint
 
+- name: Generate command to register client
+  set_fact:
+    ossec_agent_register_string: |
+      /var/ossec/bin/agent-auth
+            -m {{ ossec_server_ip|default(ossec_server_fqdn) }}
+            -p {{ ossec_server_port|default(1515) }}
+            -A '{{ ossec_agent_name|default(ansible_hostname) }}'
+            {% if ossec_agent_client_pass %}-P /var/ossec/etc/authd.pass{% endif %}
+            {% if ossec_agent_server_cert_path %}-v {{ ossec_agent_server_cert_path }}{% endif %}
+            {% if ossec_agent_cert_path %}-x {{ ossec_agent_cert_path }}{% endif %}
+            {% if ossec_agent_key_path %}-k {{ ossec_agent_key_path }}{% endif %}
+
+- debug: var=ossec_agent_register_string
+
 - name: "register client"
-  shell: "/var/ossec/bin/agent-auth -m {{ ossec_server_ip|default(ossec_server_fqdn) }} -p 1515 -A '{{ ossec_agent_name|default(ansible_hostname) }}' -P /var/ossec/etc/authd.pass"
+  command: "{{ ossec_agent_register_string }}"
   args:
     creates: /var/ossec/etc/client.keys
   tags:
@@ -107,7 +122,7 @@
   pause:
     minutes: 2
     prompt: 'Please execute the following command on your ossec-server: "service ossec-authd stop"'
-  when: not ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") == ""
+  when: ossec_agent_pause_for_manual_steps and ( not ossec_managed_server and not check_keys.stat.exists and ossec_server_name|default("") == "" )
 
 - name: "Restart ossec-remoted on server. If this is the first agent added it will not be running."
   shell: /var/ossec/bin/ossec-control restart
@@ -121,7 +136,7 @@
   pause:
     minutes: 2
     prompt: 'Please execute the following command on your ossec-server: "/var/ossec/bin/ossec-control restart"'
-  when: not ossec_managed_server and not check_server_keys.stat.exists and ossec_server_name|default("") == ""
+  when: ossec_agent_pause_for_manual_steps and ( not ossec_managed_server and not check_server_keys.stat.exists and ossec_server_name|default("") == "" )
 
 - name: "Start ossec-agent if not already running"
   service:
