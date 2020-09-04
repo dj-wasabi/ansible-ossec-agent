@@ -27,13 +27,22 @@ This role needs 4 parameters:
 * `ossec_server_name`: This is the hostname of the server running the ossec-server used for delegate with ansible.
 * `ossec_managed_server`: When set to false, tasks that delegate to ossec server will be skipped
 
-This role has 3 tasks with 'delagation_to' which needs the parameter `ossec_server_name`. When this parameter is not set, you'll need to run manually the `/var/ossec/bin/ossec-authd` on the server and `/var/ossec/bin/agent-auth` on the agent. When this is the case, it will show you an message with the exact command line.
+This role has 3 tasks with 'delagation_to' which needs the parameter `ossec_server_name`. When this parameter
+is not set, you'll need to run manually the `/var/ossec/bin/ossec-authd` on the server and `/var/ossec/bin/agent-auth`
+on the agent. When this is the case, it will pause and show you an message with the exact command line. You can skip
+these pauses using the `ossec_agent_pause_for_manual_steps` variable (see below).
 
 The following role variables are optional:
 * `ossec_active_response_disabled`: Disables active response if set to yes. If this is not defined active response is enabled.
 * `ossec_disable_public_repos`: Disables installation of public repositories if set to "yes".
 * `ossec_agent_package_name`: Default is "ossec-hids-agent". This can be set to a URL or path to a .rpm file or path to a .deb file if the public repositories cannot be used.
 * `ossec_agent_name`: Optional name for the OSSEC agent.  Default is to use hostname.
+* `ossec_agent_pause_for_manual_steps`: Defaults to true, if false then the playbook will not pause to run manual steps on server. Meant to be used with auto registration.
+* `ossec_agent_client_pass`: If set, the agent will use this password when registering with the server.
+* `ossec_agent_server_cert_path`: If set, the agent will use this root cert to validate any certs provided by the server when registering (the SAN of the cert used by the server must match the `ossec_server_name` used by the client to connect).
+* `ossec_agent_cert_path`: If set, the agent will use this cert for itself when registering.
+* `ossec_agent_key_path`: If set, the agent will use this key for itself when registering.
+```
 
 Dependencies
 ------------

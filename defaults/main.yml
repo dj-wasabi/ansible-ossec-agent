@@ -9,9 +9,11 @@ ossec_agent_package_name: ossec-hids-agent
 # Set to an empty string or null to disable adding a key
 ossec_agent_debian_repository_key: "https://www.atomicorp.com/RPM-GPG-KEY.atomicorp.txt"
 ossec_agent_debian_repository_url: "https://updates.atomicorp.com/channels/atomic/{{ ansible_distribution | lower }}"
-ossec_filename: "atomic-release-{{ ossec_server_atomic_release }}.el{{ ansible_distribution_major_version }}.art.noarch.rpm"
-ossec_url: "https://www.atomicorp.com/channels/atomic/centos/{{ ansible_distribution_major_version }}/x86_64/RPMS"
-ossec_download_url: "{{ ossec_url }}/{{ ossec_filename }}"
 
-ossec_server_disable_gpgkey: False
-ossec_agent_client_pass:
+ossec_agent_client_pass: ""
+
+ossec_agent_server_cert_path: ""
+ossec_agent_cert_path: ""
+ossec_agent_key_path: ""
+
+ossec_agent_pause_for_manual_steps: true
