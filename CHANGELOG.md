@@ -1,33 +1,66 @@
-# ansible-ossec-agent Release
+# Changelog
 
-Below an overview of all changes in the releases.
+## [0.2.1](https://github.com/dj-wasabi/ansible-ossec-agent/tree/0.2.1) (2020-09-01)
 
-Version (Release date)
+[Full Changelog](https://github.com/dj-wasabi/ansible-ossec-agent/compare/0.2.0...0.2.1)
 
-0.2.0   (2020-08-31)
+**Merged pull requests:**
 
-  * Optionally disable public repos #22 (By pull request: briankfitzwater (Thanks!))
-  * Option to set agent name #23 (By pull request: briankfitzwater (Thanks!))
-  * Switch repo to atomicorp #29 (By pull request: emmetog (Thanks!))
+- Removing requirements file and use it from ci-base repo [\#31](https://github.com/dj-wasabi/ansible-ossec-agent/pull/31) ([dj-wasabi](https://github.com/dj-wasabi))
 
-0.1.0   (2018-01-02)
+## [0.2.0](https://github.com/dj-wasabi/ansible-ossec-agent/tree/0.2.0) (2020-08-31)
 
-  * Using Molecule V2 for CI test purposes #21
-  * Add option to disable active-response in template #20 (By pull request: briankfitzwater (Thanks!))
-  * Set permisisons on client.keys file #19 (By pull request: briankfitzwater (Thanks!))
-  * Update atomic-release #17 (By pull request: aarnaud (Thanks!))
-  * Fix new debian repository #15 (By pull request: aarnaud (Thanks!))
-  * Added run_once: true to several delegate tasks #14
-  * Added first working molecule tests #13
-  * Fix agent registration in managed mode #10 (By pull request: aarnaud (Thanks!))
-  * Add ossec-server fqdn config #9 (By pull request: aarnaud (Thanks!))
-  * control ossec authd with service #5 (By pull request: jlruizmlg (Thanks!))
-  * Allow for situations where the ossec server is not managed by ansible #4 (By pull request: zeroem (Thanks!))
-  * include no dependencies #3 (By pull request: recunius (Thanks!))
-  * Distribution Handling, Agent Profile, and Starting ossec-remoted #2 (By pull request: recunius (Thanks!))
-  * EL7 fixes #1 (By pull request: andskli (Thanks!))
+[Full Changelog](https://github.com/dj-wasabi/ansible-ossec-agent/compare/0.1.0...0.2.0)
 
-0.0.1   (2014-12-07)
+**Closed issues:**
 
-  * Initial working version.
+- Deb repository doesn't contain bionic [\#28](https://github.com/dj-wasabi/ansible-ossec-agent/issues/28)
 
+**Merged pull requests:**
+
+- Create agent.yml [\#30](https://github.com/dj-wasabi/ansible-ossec-agent/pull/30) ([dj-wasabi](https://github.com/dj-wasabi))
+- Switch repo to atomicorp [\#29](https://github.com/dj-wasabi/ansible-ossec-agent/pull/29) ([emmetog](https://github.com/emmetog))
+- Added Ubuntu to Molecule testing [\#27](https://github.com/dj-wasabi/ansible-ossec-agent/pull/27) ([dj-wasabi](https://github.com/dj-wasabi))
+- Added bunch of files [\#26](https://github.com/dj-wasabi/ansible-ossec-agent/pull/26) ([dj-wasabi](https://github.com/dj-wasabi))
+- Use specific version of libraries [\#25](https://github.com/dj-wasabi/ansible-ossec-agent/pull/25) ([dj-wasabi](https://github.com/dj-wasabi))
+- Option to set agent name [\#23](https://github.com/dj-wasabi/ansible-ossec-agent/pull/23) ([briankfitzwater](https://github.com/briankfitzwater))
+- Optionally disable public repos [\#22](https://github.com/dj-wasabi/ansible-ossec-agent/pull/22) ([briankfitzwater](https://github.com/briankfitzwater))
+
+## [0.1.0](https://github.com/dj-wasabi/ansible-ossec-agent/tree/0.1.0) (2018-01-02)
+
+[Full Changelog](https://github.com/dj-wasabi/ansible-ossec-agent/compare/0.0.1...0.1.0)
+
+**Implemented enhancements:**
+
+- Use Molecule for testing [\#11](https://github.com/dj-wasabi/ansible-ossec-agent/issues/11)
+- use run\_once for the task delegating service ossec-authd start to the server [\#8](https://github.com/dj-wasabi/ansible-ossec-agent/issues/8)
+
+**Closed issues:**
+
+- Add Ubuntu support [\#7](https://github.com/dj-wasabi/ansible-ossec-agent/issues/7)
+- Add check if repository is already installed [\#6](https://github.com/dj-wasabi/ansible-ossec-agent/issues/6)
+
+**Merged pull requests:**
+
+- Using Molecule V2 for CI test purposes [\#21](https://github.com/dj-wasabi/ansible-ossec-agent/pull/21) ([dj-wasabi](https://github.com/dj-wasabi))
+- Add option to disable active-response in template [\#20](https://github.com/dj-wasabi/ansible-ossec-agent/pull/20) ([briankfitzwater](https://github.com/briankfitzwater))
+- Set permisisons on client.keys file [\#19](https://github.com/dj-wasabi/ansible-ossec-agent/pull/19) ([briankfitzwater](https://github.com/briankfitzwater))
+- Update atomic-release [\#17](https://github.com/dj-wasabi/ansible-ossec-agent/pull/17) ([aarnaud](https://github.com/aarnaud))
+- Fix new debian repository [\#15](https://github.com/dj-wasabi/ansible-ossec-agent/pull/15) ([aarnaud](https://github.com/aarnaud))
+- Added run\_once: true to several delegate tasks [\#14](https://github.com/dj-wasabi/ansible-ossec-agent/pull/14) ([dj-wasabi](https://github.com/dj-wasabi))
+- Added first working molecule tests [\#13](https://github.com/dj-wasabi/ansible-ossec-agent/pull/13) ([dj-wasabi](https://github.com/dj-wasabi))
+- Fix agent registration in managed mode [\#10](https://github.com/dj-wasabi/ansible-ossec-agent/pull/10) ([aarnaud](https://github.com/aarnaud))
+- Add ossec-server fqdn config [\#9](https://github.com/dj-wasabi/ansible-ossec-agent/pull/9) ([aarnaud](https://github.com/aarnaud))
+- control ossec authd with service [\#5](https://github.com/dj-wasabi/ansible-ossec-agent/pull/5) ([jlruizmlg](https://github.com/jlruizmlg))
+- Allow for situations where the ossec server is not managed by ansible [\#4](https://github.com/dj-wasabi/ansible-ossec-agent/pull/4) ([zeroem](https://github.com/zeroem))
+- include no dependencies [\#3](https://github.com/dj-wasabi/ansible-ossec-agent/pull/3) ([recunius](https://github.com/recunius))
+- Distribution Handling, Agent Profile, and Starting ossec-remoted [\#2](https://github.com/dj-wasabi/ansible-ossec-agent/pull/2) ([recunius](https://github.com/recunius))
+- EL7 fixes [\#1](https://github.com/dj-wasabi/ansible-ossec-agent/pull/1) ([andskli](https://github.com/andskli))
+
+## [0.0.1](https://github.com/dj-wasabi/ansible-ossec-agent/tree/0.0.1) (2014-12-07)
+
+[Full Changelog](https://github.com/dj-wasabi/ansible-ossec-agent/compare/38403ca945c6881451454b81aa41978d6100385c...0.0.1)
+
+
+
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
