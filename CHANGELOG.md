@@ -1,12 +1,16 @@
 # Changelog
 
-## [0.2.1](https://github.com/dj-wasabi/ansible-ossec-agent/tree/0.2.1) (2020-09-01)
+## [Unreleased](https://github.com/dj-wasabi/ansible-ossec-agent/tree/HEAD)
 
-[Full Changelog](https://github.com/dj-wasabi/ansible-ossec-agent/compare/0.2.0...0.2.1)
+[Full Changelog](https://github.com/dj-wasabi/ansible-ossec-agent/compare/0.2.1...HEAD)
 
 **Merged pull requests:**
 
-- Removing requirements file and use it from ci-base repo [\#31](https://github.com/dj-wasabi/ansible-ossec-agent/pull/31) ([dj-wasabi](https://github.com/dj-wasabi))
+- Change requirements.txt location; Added pre-commit-hook [\#33](https://github.com/dj-wasabi/ansible-ossec-agent/pull/33) ([dj-wasabi](https://github.com/dj-wasabi))
+
+## [0.2.1](https://github.com/dj-wasabi/ansible-ossec-agent/tree/0.2.1) (2020-09-01)
+
+[Full Changelog](https://github.com/dj-wasabi/ansible-ossec-agent/compare/0.2.0...0.2.1)
 
 ## [0.2.0](https://github.com/dj-wasabi/ansible-ossec-agent/tree/0.2.0) (2020-08-31)
 
@@ -15,16 +19,6 @@
 **Closed issues:**
 
 - Deb repository doesn't contain bionic [\#28](https://github.com/dj-wasabi/ansible-ossec-agent/issues/28)
-
-**Merged pull requests:**
-
-- Create agent.yml [\#30](https://github.com/dj-wasabi/ansible-ossec-agent/pull/30) ([dj-wasabi](https://github.com/dj-wasabi))
-- Switch repo to atomicorp [\#29](https://github.com/dj-wasabi/ansible-ossec-agent/pull/29) ([emmetog](https://github.com/emmetog))
-- Added Ubuntu to Molecule testing [\#27](https://github.com/dj-wasabi/ansible-ossec-agent/pull/27) ([dj-wasabi](https://github.com/dj-wasabi))
-- Added bunch of files [\#26](https://github.com/dj-wasabi/ansible-ossec-agent/pull/26) ([dj-wasabi](https://github.com/dj-wasabi))
-- Use specific version of libraries [\#25](https://github.com/dj-wasabi/ansible-ossec-agent/pull/25) ([dj-wasabi](https://github.com/dj-wasabi))
-- Option to set agent name [\#23](https://github.com/dj-wasabi/ansible-ossec-agent/pull/23) ([briankfitzwater](https://github.com/briankfitzwater))
-- Optionally disable public repos [\#22](https://github.com/dj-wasabi/ansible-ossec-agent/pull/22) ([briankfitzwater](https://github.com/briankfitzwater))
 
 ## [0.1.0](https://github.com/dj-wasabi/ansible-ossec-agent/tree/0.1.0) (2018-01-02)
 
@@ -42,10 +36,6 @@
 
 **Merged pull requests:**
 
-- Using Molecule V2 for CI test purposes [\#21](https://github.com/dj-wasabi/ansible-ossec-agent/pull/21) ([dj-wasabi](https://github.com/dj-wasabi))
-- Add option to disable active-response in template [\#20](https://github.com/dj-wasabi/ansible-ossec-agent/pull/20) ([briankfitzwater](https://github.com/briankfitzwater))
-- Set permisisons on client.keys file [\#19](https://github.com/dj-wasabi/ansible-ossec-agent/pull/19) ([briankfitzwater](https://github.com/briankfitzwater))
-- Update atomic-release [\#17](https://github.com/dj-wasabi/ansible-ossec-agent/pull/17) ([aarnaud](https://github.com/aarnaud))
 - Fix new debian repository [\#15](https://github.com/dj-wasabi/ansible-ossec-agent/pull/15) ([aarnaud](https://github.com/aarnaud))
 - Added run\_once: true to several delegate tasks [\#14](https://github.com/dj-wasabi/ansible-ossec-agent/pull/14) ([dj-wasabi](https://github.com/dj-wasabi))
 - Added first working molecule tests [\#13](https://github.com/dj-wasabi/ansible-ossec-agent/pull/13) ([dj-wasabi](https://github.com/dj-wasabi))
