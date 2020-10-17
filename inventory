@@ -1,4 +1,0 @@
-[agent]
-ossec-agent-centos ansible_connection=docker
-ossec-agent-debian ansible_connection=docker
-ossec-agent-ubuntu ansible_connection=docker
