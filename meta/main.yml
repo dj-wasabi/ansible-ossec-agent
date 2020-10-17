@@ -4,7 +4,7 @@ galaxy_info:
   description: Installing and maintaining the ossec-agent.
   company: myCompany.Dotcom
   license: MIT
-  min_ansible_version: 2.4
+  min_ansible_version: 2.9
   platforms:
     - name: EL
       versions:
@@ -17,11 +17,9 @@ galaxy_info:
     - name: Debian
       versions:
         - all
-  categories:
-    - monitoring
   galaxy_tags:
     - ossec
-    - ossec-agent
+    - ossecagent
     - hids
     - monitoring
 dependencies: []

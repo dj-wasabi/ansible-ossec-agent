@@ -1,0 +1,5 @@
+# Ignore certain ansible-lint error messages.
+warn_list:
+  - '106'
+  - '204'
+  - '602'

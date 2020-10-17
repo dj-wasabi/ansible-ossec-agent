@@ -20,7 +20,7 @@
         warn: False
       when:
         - ansible_os_family == "Debian"
-    
+
     - name: "Installing tools on Debian"
       apt:
         name:
