@@ -6,9 +6,31 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+      - main
+    paths:
+      - 'defaults/**'
+      - 'files/**'
+      - 'handlers/**'
+      - 'meta/**'
+      - 'molecule/**'
+      - 'tasks/**'
+      - 'templates/**'
+      - '.github/workflows/agent.yml'
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
+      - main
+    paths:
+      - 'defaults/**'
+      - 'files/**'
+      - 'handlers/**'
+      - 'meta/**'
+      - 'molecule/**'
+      - 'tasks/**'
+      - 'templates/**'
+      - '.github/workflows/agent.yml'
 
 jobs:
   build:
