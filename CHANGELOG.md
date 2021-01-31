@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/dj-wasabi/ansible-ossec-agent/tree/HEAD)
+## [0.2.2](https://github.com/dj-wasabi/ansible-ossec-agent/tree/0.2.2) (2021-01-31)
 
-[Full Changelog](https://github.com/dj-wasabi/ansible-ossec-agent/compare/0.2.1...HEAD)
+[Full Changelog](https://github.com/dj-wasabi/ansible-ossec-agent/compare/0.2.1...0.2.2)
 
 **Implemented enhancements:**
 
