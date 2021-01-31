@@ -12,7 +12,6 @@
 
 - Cleanup of old and outdated files and directories [\#34](https://github.com/dj-wasabi/ansible-ossec-agent/pull/34) ([dj-wasabi](https://github.com/dj-wasabi))
 - Change requirements.txt location; Added pre-commit-hook [\#33](https://github.com/dj-wasabi/ansible-ossec-agent/pull/33) ([dj-wasabi](https://github.com/dj-wasabi))
-- Create agent.yml [\#30](https://github.com/dj-wasabi/ansible-ossec-agent/pull/30) ([dj-wasabi](https://github.com/dj-wasabi))
 
 ## [0.2.1](https://github.com/dj-wasabi/ansible-ossec-agent/tree/0.2.1) (2020-09-01)
 
